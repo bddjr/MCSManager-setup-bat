@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 >nul
 title %~nx0
-cd /d %~dp0
+cd /d "%~dp0"
 echo MCSManager uninstaller
 echo https://gitee.com/bddjr/MCSManager-setup-bat
 echo;
@@ -39,8 +39,10 @@ echo # 等待3秒
 ; timeout /T 3 /nobreak
 
 echo;
-echo # 删除 %MCSManager_install_file%
+echo # 删除 "%MCSManager_install_file%"
 ; rd /s /q "%MCSManager_install_file%"
+if %errorlevel%==0 echo 成功
+;
 
 :gotopause
 echo;
