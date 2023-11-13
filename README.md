@@ -1,3 +1,8 @@
+## Language
+> ***zh_CN***  
+> [en](README/en.md)  
+
+***
 # MCSManager setup bat
 一款为 MCSManager 做的 Windows 版在线安装脚本。  
 
@@ -37,7 +42,7 @@ cd /d "%temp%" && powershell "(-join("""`r`n""" , (((Invoke-WebRequest -Uri http
 sc start MCSManager-daemon && sc start MCSManager-web
 ```
 
-### 3. 删除安装脚本与缓存压缩包 (可选)
+### 3. 删除安装脚本与缓存压缩包
 cmd 运行命令  
 ```cmd
 del "%temp%\MCSManager-setup-cn-gitee.bat"

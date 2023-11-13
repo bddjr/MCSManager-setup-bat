@@ -4,9 +4,8 @@ chcp 65001 >nul
 title %~nx0
 cd /d "%~dp0"
 echo MCSManager setup bat
-echo 一款为 MCSManager 做的 Windows 版在线安装脚本。
-
-echo https://gitee.com/bddjr/MCSManager-setup-bat
+; echo 一款为 MCSManager 做的 Windows 版在线安装脚本。
+; echo https://gitee.com/bddjr/MCSManager-setup-bat
 echo;
 Net session >nul 2>&1 || (
     echo 尝试以管理员权限运行脚本……
@@ -139,7 +138,7 @@ if "%can_not_install_services%"=="true" (
 echo;
 if %errorlevel% neq 0 echo 错误代码 %errorlevel%
 echo 如果需要再次运行安装脚本，请用管理员权限运行命令：
-; echo "%%temp%%\MCSManager-setup-cn-gitee.bat"
+; echo "%%temp%%\MCSManager-setup-cn-gitee.bat" nopause
 ; echo;
 echo 如果需要删除安装脚本与缓存压缩包，请用管理员权限运行命令：
 ; echo del "%%temp%%\MCSManager-setup-cn-gitee.bat"

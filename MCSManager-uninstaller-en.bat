@@ -45,7 +45,7 @@ if not exist "%MCSManager_install_file%\" echo Successfully removed.
 echo;
 if %errorlevel% neq 0 echo Error code %errorlevel%
 echo If you need to run the uninstall script again, please run the command with administrator privileges:
-; echo "%%temp%%\MCSManager-uninstaller-cn.bat"
+; echo "%%temp%%\MCSManager-uninstaller-cn.bat" nopause
 ; echo;
 echo If you need to delete the uninstallation script, please run the command with administrator privileges:
 ; echo del "%%temp%%\MCSManager-uninstaller-cn.bat"

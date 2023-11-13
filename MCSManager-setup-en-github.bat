@@ -4,8 +4,8 @@ chcp 65001 >nul
 title %~nx0
 cd /d "%~dp0"
 echo MCSManager setup bat
-
-echo https://github.com/bddjr/MCSManager-setup-bat
+; echo A Windows version online installation script for MCSManager.
+; echo https://github.com/bddjr/MCSManager-setup-bat
 echo;
 Net session >nul 2>&1 || (
     echo Trying to run as Administrator...
@@ -139,7 +139,7 @@ if "%can_not_install_services%"=="true" (
 echo;
 if %errorlevel% neq 0 echo Error code %errorlevel%
 echo If you need to run the installation script again, please run the command with administrator privileges:
-; echo "%%temp%%\MCSManager-setup-cn-gitee.bat"
+; echo "%%temp%%\MCSManager-setup-cn-gitee.bat" nopause
 ; echo;
 echo If you need to delete the installation script and cache compression package, please run the command with administrator privileges:
 ; echo del "%%temp%%\MCSManager-setup-cn-gitee.bat"
