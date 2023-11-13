@@ -1,4 +1,5 @@
 @echo off
+rem Encoding: GBK (ANSI)
 title %~nx0
 cd /d "%~dp0"
 echo MCSManager setup bat
@@ -51,12 +52,12 @@ echo # Verify file hash value
 
 ; for /F %%i in ('powershell ^(Get-FileHash MCSManager.zip^).Hash') do ( set downloaded_hash=%%i)
 if %errorlevel% neq 0 goto gotopause
-echo hash：%downloaded_hash%
+echo hash��%downloaded_hash%
 
 ; echo Obtain the hash value of cloud files
 ; for /F %%i in ('powershell ^([System.Text.Encoding]::GetEncoding^(65001^)^).GetString^(^(Invoke-WebRequest "%release_download_url%/%download_hash_name%" -UseBasicParsing^).Content^)') do ( set cloud_hash=%%i)
 if %errorlevel% neq 0 goto gotopause
-echo hash：%cloud_hash%
+echo hash��%cloud_hash%
 
 ; if /i "%downloaded_hash%" neq "%cloud_hash%" (
     echo Error: Hash values are different

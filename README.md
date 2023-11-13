@@ -13,7 +13,6 @@
 ***
 ## 开始使用
 如果您需要在云服务器安装，请使用远程桌面，而不是ssh。  
-接下来将以 `MCSManager-setup-cn-gitee.bat` 作为演示使用的脚本。  
 
 ### 以管理员权限运行CMD  
 复制下面这行命令，然后在服务器的远程桌面，按键盘 `win`+`R` 打开“运行” ，然后按键盘 `Ctrl`+`V` 的粘贴，然后按键盘的 `Enter` 。  
@@ -27,6 +26,8 @@ powershell start-process -verb runas cmd
 
 ***
 ## 安装
+接下来将以 `MCSManager-setup-cn-gitee.bat` 作为演示使用的脚本。  
+
 ### 1. 下载并运行安装脚本
 复制下面这行命令，然后在服务器的远程桌面，对着管理员权限的 cmd 窗口右键粘贴，然后按键盘 `Enter` 运行。  
 ```cmd
@@ -49,14 +50,16 @@ del "%temp%\MCSManager.zip"
 
 ***
 ## 卸载
+接下来将以 `MCSManager-uninstaller-cn.bat` 作为演示使用的脚本。  
+
 ### 1. 下载并运行卸载脚本
 复制下面这行命令，然后在服务器的远程桌面，对着管理员权限的 cmd 窗口右键粘贴，然后按键盘 `Enter` 运行。  
 ```cmd
-cd /d "%temp%" && powershell curl -o MCSManager-uninstaller.bat https://gitee.com/bddjr/MCSManager-setup-bat/raw/main/MCSManager-uninstaller.bat && .\MCSManager-uninstaller.bat nopause
+cd /d "%temp%" && powershell curl -o MCSManager-uninstaller-cn.bat https://gitee.com/bddjr/MCSManager-setup-bat/raw/main/MCSManager-uninstaller-cn.bat && .\MCSManager-uninstaller-cn.bat nopause
 ```
 该脚本将会停止服务、移除服务，然后删除文件夹 `C:\Program Files\MCSManager` 。  
 ### 2. 删除卸载脚本
 cmd 运行命令  
 ```cmd
-del "%temp%\MCSManager-uninstaller.bat"
+del "%temp%\MCSManager-uninstaller-cn.bat"
 ```
