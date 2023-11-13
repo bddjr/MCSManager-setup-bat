@@ -38,7 +38,7 @@ echo # Wait for 3 seconds
 echo;
 echo # Remove dir "%MCSManager_install_file%"
 ; rd /s /q "%MCSManager_install_file%"
-if not exist "%MCSManager_install_file%\" Successfully removed.
+if not exist "%MCSManager_install_file%\" echo Successfully removed.
 ;
 
 :gotopause

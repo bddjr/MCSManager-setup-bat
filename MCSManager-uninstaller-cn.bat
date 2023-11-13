@@ -38,7 +38,7 @@ echo # 等待3秒
 echo;
 echo # 移除目录 "%MCSManager_install_file%"
 ; rd /s /q "%MCSManager_install_file%"
-if not exist "%MCSManager_install_file%\" 移除成功。
+if not exist "%MCSManager_install_file%\" echo 移除成功。
 ;
 
 :gotopause
