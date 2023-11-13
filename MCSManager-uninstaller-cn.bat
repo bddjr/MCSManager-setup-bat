@@ -1,17 +1,18 @@
 @echo off
-rem Encoding: GBK (ANSI)
+rem Encoding: UTF8
+chcp 65001 >nul
 title %~nx0
 cd /d "%~dp0"
 echo MCSManager uninstaller
 echo https://gitee.com/bddjr/MCSManager-setup-bat
 echo;
 Net session >nul 2>&1 || (
-    echo ³¢ÊÔÒÔ¹ÜÀíÔ±È¨ÏÞÔËÐÐ½Å±¾¡­¡­
+    echo å°è¯•ä»¥ç®¡ç†å‘˜æƒé™è¿è¡Œè„šæœ¬â€¦â€¦
     powershell start-process "%~nx0" -verb runas
     exit
 )
 
-echo ÄãÈ·¶¨ÒªÐ¶ÔØ MCSManager Âð£¿Èç¹ûÈ·¶¨ÔòÊäÈëyes
+echo ä½ ç¡®å®šè¦å¸è½½ MCSManager å—ï¼Ÿå¦‚æžœç¡®å®šåˆ™è¾“å…¥yes
 set /p y_n=
 if /i "%y_n%" neq "yes" goto gotopause
 
@@ -19,35 +20,35 @@ if /i "%y_n%" neq "yes" goto gotopause
 set MCSManager_install_file=C:\Program Files\MCSManager
 
 echo;
-echo # Í£Ö¹ MCSManager-web ·þÎñ
+echo # åœæ­¢ MCSManager-web æœåŠ¡
 ; sc stop MCSManager-web
 
 echo;
-echo # Ð¶ÔØ MCSManager-web ·þÎñ
+echo # å¸è½½ MCSManager-web æœåŠ¡
 ; sc delete MCSManager-web
 
 echo;
-echo # Í£Ö¹ MCSManager-daemon ·þÎñ
+echo # åœæ­¢ MCSManager-daemon æœåŠ¡
 ; sc stop MCSManager-daemon
 
 echo;
-echo # Ð¶ÔØ MCSManager-daemon ·þÎñ
+echo # å¸è½½ MCSManager-daemon æœåŠ¡
 ; sc delete MCSManager-daemon
 
 echo;
-echo # µÈ´ý3Ãë
+echo # ç­‰å¾…3ç§’
 ; timeout /T 3 /nobreak
 
 echo;
-echo # É¾³ý "%MCSManager_install_file%"
+echo # åˆ é™¤ "%MCSManager_install_file%"
 ; rd /s /q "%MCSManager_install_file%"
-if %errorlevel%==0 echo ³É¹¦
+if %errorlevel%==0 echo æˆåŠŸ
 ;
 
 :gotopause
 echo;
-if %errorlevel% neq 0 echo ´íÎó´úÂë %errorlevel%
+if %errorlevel% neq 0 echo é”™è¯¯ä»£ç  %errorlevel%
 if "%1" neq "nopause" (
-    echo ³ÌÐòÒÑÍ£Ö¹£¬°´ÈÎÒâ¼üÍË³ö
+    echo ç¨‹åºå·²åœæ­¢ï¼ŒæŒ‰ä»»æ„é”®é€€å‡º
     ; pause >nul
 )

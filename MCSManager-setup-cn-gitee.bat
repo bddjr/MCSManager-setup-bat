@@ -1,20 +1,21 @@
 @echo off
-rem Encoding: GBK (ANSI)
+rem Encoding: UTF8
+chcp 65001 >nul
 title %~nx0
 cd /d "%~dp0"
 echo MCSManager setup bat
-echo Ò»¿îÎª MCSManager ×öµÄ Windows °æÔÚÏß°²×°½Å±¾¡£
+echo ä¸€æ¬¾ä¸º MCSManager åšçš„ Windows ç‰ˆåœ¨çº¿å®‰è£…è„šæœ¬ã€‚
 
 echo https://gitee.com/bddjr/MCSManager-setup-bat
 echo;
 Net session >nul 2>&1 || (
-    echo ³¢ÊÔÒÔ¹ÜÀíÔ±È¨ÏÞÔËÐÐ½Å±¾¡­¡­
+    echo å°è¯•ä»¥ç®¡ç†å‘˜æƒé™è¿è¡Œè„šæœ¬â€¦â€¦
 
     powershell start-process "%~nx0" -verb runas
     exit
 )
 
-echo ÄãÈ·¶¨Òª°²×° MCSManager Âð£¿Èç¹ûÈ·¶¨ÔòÊäÈëyes
+echo ä½ ç¡®å®šè¦å®‰è£… MCSManager å—ï¼Ÿå¦‚æžœç¡®å®šåˆ™è¾“å…¥yes
 ; set /p y_n_install=
 if /i "%y_n_install%" neq "yes" goto gotopause
 
@@ -28,17 +29,17 @@ set downloaded=false
 
 
 echo;
-echo # ¼ì²éÇ°ÖÃpowershellÃüÁîÊÇ·ñ´æÔÚ
+echo # æ£€æŸ¥å‰ç½®powershellå‘½ä»¤æ˜¯å¦å­˜åœ¨
 ;
-echo ¼ì²é Get-FileHash
+echo æ£€æŸ¥ Get-FileHash
 ; powershell Get-Command Get-FileHash
 if %errorlevel% neq 0 goto gotopause
 
-echo ¼ì²é Invoke-WebRequest
+echo æ£€æŸ¥ Invoke-WebRequest
 ; powershell Get-Command Invoke-WebRequest
 if %errorlevel% neq 0 goto gotopause
 
-echo ¼ì²é Expand-Archive
+echo æ£€æŸ¥ Expand-Archive
 ; powershell Get-Command Expand-Archive
 if %errorlevel% neq 0 goto gotopause
 
@@ -47,31 +48,31 @@ if %errorlevel% neq 0 goto gotopause
 if not exist %MCSManager_zip_name% goto download
 :checkhash
 echo;
-echo # Ð£ÑéÎÄ¼þ¹þÏ£Öµ
+echo # æ ¡éªŒæ–‡ä»¶å“ˆå¸Œå€¼
 
-; echo »ñÈ¡±¾µØ¹þÏ£Öµ
+; echo èŽ·å–æœ¬åœ°å“ˆå¸Œå€¼
 
 ; for /F %%i in ('powershell ^(Get-FileHash MCSManager.zip^).Hash') do ( set downloaded_hash=%%i)
 if %errorlevel% neq 0 goto gotopause
-echo ±¾µØÎÄ¼þ¹þÏ£Öµ£º%downloaded_hash%
+echo æœ¬åœ°æ–‡ä»¶å“ˆå¸Œå€¼ï¼š%downloaded_hash%
 
-; echo »ñÈ¡ÔÆÎÄ¼þ¹þÏ£Öµ
+; echo èŽ·å–äº‘æ–‡ä»¶å“ˆå¸Œå€¼
 ; for /F %%i in ('powershell ^([System.Text.Encoding]::GetEncoding^(65001^)^).GetString^(^(Invoke-WebRequest "%release_download_url%/%download_hash_name%" -UseBasicParsing^).Content^)') do ( set cloud_hash=%%i)
 if %errorlevel% neq 0 goto gotopause
-echo ÔÆÎÄ¼þ¹þÏ£Öµ£º%cloud_hash%
+echo äº‘æ–‡ä»¶å“ˆå¸Œå€¼ï¼š%cloud_hash%
 
 ; if /i "%downloaded_hash%" neq "%cloud_hash%" (
-    echo ´íÎó£ºÁ½Õß¹þÏ£Öµ²»Í¬
+    echo é”™è¯¯ï¼šä¸¤è€…å“ˆå¸Œå€¼ä¸åŒ
     ; if "%downloaded%"=="true" goto gotopause
 ) else (
-    echo ÕýÈ·£ºÁ½Õß¹þÏ£ÖµÏàÍ¬
+    echo æ­£ç¡®ï¼šä¸¤è€…å“ˆå¸Œå€¼ç›¸åŒ
     ; goto unzip
 )
 
 
 :download
 echo;
-echo # ÏÂÔØ MCSManager
+echo # ä¸‹è½½ MCSManager
 ;
 @echo on
 powershell Invoke-WebRequest -Uri %release_download_url%/%MCSManager_zip_name% -OutFile %MCSManager_zip_name% -UseBasicParsing
@@ -83,9 +84,9 @@ goto checkhash
 
 :unzip
 echo;
-echo # ½âÑ¹µ½ "%MCSManager_install_file%"
+echo # è§£åŽ‹åˆ° "%MCSManager_install_file%"
 ; if "%downloaded%"=="false" if exist "%MCSManager_install_file%" (
-    echo ¼ì²âµ½ÒÑÓÐ¸ÃÎÄ¼þ¼Ð£¬È·¶¨ÒªÔÙ´Î½âÑ¹Âð£¿Èç¹ûÈ·¶¨ÔòÊäÈëyes
+    echo æ£€æµ‹åˆ°å·²æœ‰è¯¥æ–‡ä»¶å¤¹ï¼Œç¡®å®šè¦å†æ¬¡è§£åŽ‹å—ï¼Ÿå¦‚æžœç¡®å®šåˆ™è¾“å…¥yes
     ; set /p y_n_unzip=
     if /i "%y_n_unzip%" neq "yes" goto install_services
 )
@@ -97,7 +98,7 @@ if %errorlevel% neq 0 goto gotopause
 set can_not_install_services=false
 
 echo;
-echo # °²×° MCSManager-daemon ·þÎñ
+echo # å®‰è£… MCSManager-daemon æœåŠ¡
 ;
 cd /d "%MCSManager_install_file%\daemon\winsw"
 sc delete MCSManager-daemon
@@ -106,7 +107,7 @@ if %errorlevel% neq 0 set can_not_install_services=true
 
 
 echo;
-echo # °²×° MCSManager-web ·þÎñ
+echo # å®‰è£… MCSManager-web æœåŠ¡
 
 cd /d "%MCSManager_install_file%\web\winsw"
 sc delete MCSManager-web
@@ -115,17 +116,17 @@ if %errorlevel% neq 0 set can_not_install_services=true
 
 echo;
 if "%can_not_install_services%"=="true" (
-    echo ·þÎñ°²×°Ê§°Ü£¬ÇëÖØÆôWindowsºóÖØÊÔ
+    echo æœåŠ¡å®‰è£…å¤±è´¥ï¼Œè¯·é‡å¯WindowsåŽé‡è¯•
 ) else (
-    echo ·þÎñ°²×°³É¹¦£¡ÒÔ¹ÜÀíÔ±È¨ÏÞÏÂÃæÕâÐÐÃüÁîÒÔÆô¶¯·þÎñ£º
+    echo æœåŠ¡å®‰è£…æˆåŠŸï¼ä»¥ç®¡ç†å‘˜æƒé™ä¸‹é¢è¿™è¡Œå‘½ä»¤ä»¥å¯åŠ¨æœåŠ¡ï¼š
     ; echo sc start MCSManager-daemon ^&^& sc start MCSManager-web
 )
 
 :gotopause
 echo;
-if %errorlevel% neq 0 echo ´íÎó´úÂë %errorlevel%
+if %errorlevel% neq 0 echo é”™è¯¯ä»£ç  %errorlevel%
 if "%1" neq "nopause" (
-    echo ³ÌÐòÒÑÍ£Ö¹£¬°´ÈÎÒâ¼üÍË³ö
+    echo ç¨‹åºå·²åœæ­¢ï¼ŒæŒ‰ä»»æ„é”®é€€å‡º
     ;
     pause >nul
 )
