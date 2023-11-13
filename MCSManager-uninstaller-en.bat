@@ -4,15 +4,15 @@ chcp 65001 >nul
 title %~nx0
 cd /d "%~dp0"
 echo MCSManager uninstaller
-echo https://gitee.com/bddjr/MCSManager-setup-bat
+echo https://github.com/bddjr/MCSManager-setup-bat
 echo;
 Net session >nul 2>&1 || (
-    echo 尝试以管理员权限运行脚本……
+    echo Trying to run as Administrator...
     powershell start-process "%~nx0" -verb runas
     exit
 )
 
-echo 你确定要卸载 MCSManager 吗？如果确定则输入yes
+echo Are you sure you want to uninstall MCSManager? If OK, enter "yes"
 set /p y_n=
 if /i "%y_n%" neq "yes" goto gotopause
 
@@ -20,32 +20,32 @@ if /i "%y_n%" neq "yes" goto gotopause
 set MCSManager_install_file=C:\Program Files\MCSManager
 
 echo;
-echo # 停止 MCSManager-web 服务
+echo # Stop MCSManager-web service
 ; sc stop MCSManager-web
-echo # 删除 MCSManager-web 服务
+echo # Delete MCSManager-web service
 ; sc delete MCSManager-web
 
 echo;
-echo # 停止 MCSManager-daemon 服务
+echo # Stop MCSManager-daemon service
 ; sc stop MCSManager-daemon
-echo # 删除 MCSManager-daemon 服务
+echo # Delete MCSManager-daemon service
 ; sc delete MCSManager-daemon
 
 echo;
-echo # 等待3秒
+echo # Wait for 3 seconds
 ; timeout /T 3 /nobreak
 
 echo;
-echo # 移除目录 "%MCSManager_install_file%"
+echo # Remove dir "%MCSManager_install_file%"
 ; rd /s /q "%MCSManager_install_file%"
-if not exist "%MCSManager_install_file%\" 移除成功。
+if not exist "%MCSManager_install_file%\" Successfully removed.
 ;
 
 :gotopause
 echo;
-if %errorlevel% neq 0 echo 错误代码 %errorlevel%
+if %errorlevel% neq 0 echo Error code %errorlevel%
 if "%1" neq "nopause" (
-    echo 程序已停止，按任意键退出
+    echo The program has stopped, press any key to exit
     ; pause >nul
 )
 cd /d "%~dp0"

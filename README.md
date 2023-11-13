@@ -31,7 +31,7 @@ powershell start-process -verb runas cmd
 ### 1. 下载并运行安装脚本
 复制下面这行命令，然后在服务器的远程桌面，对着管理员权限的 cmd 窗口右键粘贴，然后按键盘 `Enter` 运行。  
 ```cmd
-cd /d "%temp%" && powershell Invoke-WebRequest -Uri "https://gitee.com/bddjr/MCSManager-setup-bat/raw/main/MCSManager-setup-en-gitee.bat" -OutFile MCSManager-setup-cn-gitee.bat && .\MCSManager-setup-cn-gitee.bat nopause
+cd /d "%temp%" && powershell "(-join("""`r`n""" , (((Invoke-WebRequest -Uri https://gitee.com/bddjr/MCSManager-setup-bat/raw/main/MCSManager-setup-cn-gitee.bat -UseBasicParsing).Content) -replace '\n',"""`r`n"""))) | Out-File -Encoding utf8 -FilePath MCSManager-setup-cn-gitee.bat" && .\MCSManager-setup-cn-gitee.bat nopause
 ```
 该脚本将会下载并解压 MCSManager 到 `C:\Program Files\MCSManager` ，然后自动安装服务。  
 
@@ -55,14 +55,12 @@ del "%temp%\MCSManager.zip"
 ### 1. 下载并运行卸载脚本
 复制下面这行命令，然后在服务器的远程桌面，对着管理员权限的 cmd 窗口右键粘贴，然后按键盘 `Enter` 运行。  
 ```cmd
-cd /d "%temp%" && powershell curl -o MCSManager-uninstaller-cn.bat https://gitee.com/bddjr/MCSManager-setup-bat/raw/main/MCSManager-uninstaller-cn.bat && .\MCSManager-uninstaller-cn.bat nopause
+cd /d "%temp%" && powershell "(-join("""`r`n""" , (((Invoke-WebRequest -Uri https://gitee.com/bddjr/MCSManager-setup-bat/raw/main/MCSManager-uninstaller-cn.bat -UseBasicParsing).Content) -replace '\n',"""`r`n"""))) | Out-File -Encoding utf8 -FilePath MCSManager-uninstaller-cn.bat" && .\MCSManager-uninstaller-cn.bat nopause
 ```
 该脚本将会停止服务、移除服务，然后删除文件夹 `C:\Program Files\MCSManager` 。  
+
 ### 2. 删除卸载脚本
 cmd 运行命令  
 ```cmd
 del "%temp%\MCSManager-uninstaller-cn.bat"
 ```
-
-***
-powershell ""([System.Text.Encoding]::UTF8.GetString((Invoke-WebRequest -Uri "https://gitee.com/bddjr/MCSManager-setup-bat/raw/main/MCSManager-setup-cn-gitee.bat" -UseBasicParsing).RawContentStream.ToArray())) ^| Out-File -Encoding utf8 -FilePath MCSManager-setup-cn-gitee.bat""

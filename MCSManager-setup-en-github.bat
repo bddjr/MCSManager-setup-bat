@@ -5,7 +5,7 @@ title %~nx0
 cd /d "%~dp0"
 echo MCSManager setup bat
 
-echo https://gitee.com/bddjr/MCSManager-setup-bat
+echo https://github.com/bddjr/MCSManager-setup-bat
 echo;
 Net session >nul 2>&1 || (
     echo Trying to run as Administrator...
@@ -21,7 +21,7 @@ if /i "%y_n_install%" neq "yes" goto gotopause
 set MCSManager_zip_name=MCSManager.zip
 set MCSManager_install_file=C:\Program Files\MCSManager
 set WinSW_name=WinSW.NET461.exe
-set release_download_url=https://gitee.com/bddjr/MCSManager-setup-bat/releases/download/MCSManager
+set release_download_url=https://github.com/bddjr/MCSManager-setup-bat/releases/download/MCSManager
 set download_hash_name=SHA256.txt
 
 set downloaded=false
@@ -97,18 +97,32 @@ if %errorlevel% neq 0 goto gotopause
 set can_not_install_services=false
 
 echo;
-echo # Install MCSManager-daemon service
-;
-cd /d "%MCSManager_install_file%\daemon\winsw"
-sc delete MCSManager-daemon
-.\%WinSW_name% install
-if %errorlevel% neq 0 set can_not_install_services=true
+echo # Stop MCSManager-web service
+; sc stop MCSManager-web
+echo # Delete MCSManager-web service
+; sc delete MCSManager-web
+
+echo;
+echo # Stop MCSManager-daemon service
+; sc stop MCSManager-daemon
+echo # Delete MCSManager-daemon service
+; sc delete MCSManager-daemon
 
 
 echo;
-echo # Install MCSManager-web service
+echo # Wait for 3 seconds
+; timeout /T 3 /nobreak
 
-cd /d "%MCSManager_install_file%\web\winsw"
+
+echo;
+echo # Install MCSManager-daemon service
+; cd /d "%MCSManager_install_file%\daemon\winsw"
+.\%WinSW_name% install
+if %errorlevel% neq 0 set can_not_install_services=true
+
+echo;
+echo # Install MCSManager-web service
+; cd /d "%MCSManager_install_file%\web\winsw"
 sc delete MCSManager-web
 .\%WinSW_name% install
 if %errorlevel% neq 0 set can_not_install_services=true
@@ -126,6 +140,6 @@ echo;
 if %errorlevel% neq 0 echo Error code %errorlevel%
 if "%1" neq "nopause" (
     echo The program has stopped, press any key to exit
-    ;
-    pause >nul
+    ; pause >nul
 )
+cd /d "%~dp0"

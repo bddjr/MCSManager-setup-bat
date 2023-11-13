@@ -98,19 +98,32 @@ if %errorlevel% neq 0 goto gotopause
 set can_not_install_services=false
 
 echo;
-echo # 安装 MCSManager-daemon 服务
-;
-cd /d "%MCSManager_install_file%\daemon\winsw"
-sc delete MCSManager-daemon
-.\%WinSW_name% install
-if %errorlevel% neq 0 set can_not_install_services=true
+echo # 停止 MCSManager-web 服务
+; sc stop MCSManager-web
+echo # 删除 MCSManager-web 服务
+; sc delete MCSManager-web
+
+echo;
+echo # 停止 MCSManager-daemon 服务
+; sc stop MCSManager-daemon
+echo # 删除 MCSManager-daemon 服务
+; sc delete MCSManager-daemon
 
 
 echo;
-echo # 安装 MCSManager-web 服务
+echo # 等待3秒
+; timeout /T 3 /nobreak
 
-cd /d "%MCSManager_install_file%\web\winsw"
-sc delete MCSManager-web
+
+echo;
+echo # 安装 MCSManager-daemon 服务
+; cd /d "%MCSManager_install_file%\daemon\winsw"
+.\%WinSW_name% install
+if %errorlevel% neq 0 set can_not_install_services=true
+
+echo;
+echo # 安装 MCSManager-web 服务
+; cd /d "%MCSManager_install_file%\web\winsw"
 .\%WinSW_name% install
 if %errorlevel% neq 0 set can_not_install_services=true
 
@@ -127,6 +140,6 @@ echo;
 if %errorlevel% neq 0 echo 错误代码 %errorlevel%
 if "%1" neq "nopause" (
     echo 程序已停止，按任意键退出
-    ;
-    pause >nul
+    ; pause >nul
 )
+cd /d "%~dp0"
