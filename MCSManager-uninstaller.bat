@@ -11,35 +11,41 @@ Net session >nul 2>&1 || (
     exit
 )
 
-echo 你确定要安装 MCSManager 吗？如果确定则输入yes
+echo 你确定要卸载 MCSManager 吗？如果确定则输入yes
 set /p y_n=
-if /i "%y_n%" neq "yes" goto pause
+if /i "%y_n%" neq "yes" goto gotopause
 
 
 set MCSManager_install_file=C:\Program Files\MCSManager
 
+echo;
 echo # 停止 MCSManager-web 服务
-sc stop MCSManager-web
+; sc stop MCSManager-web
 
+echo;
 echo # 卸载 MCSManager-web 服务
-sc delete MCSManager-web
+; sc delete MCSManager-web
 
+echo;
 echo # 停止 MCSManager-daemon 服务
-sc stop MCSManager-daemon
+; sc stop MCSManager-daemon
 
+echo;
 echo # 卸载 MCSManager-daemon 服务
-sc delete MCSManager-daemon
+; sc delete MCSManager-daemon
 
+echo;
 echo # 等待3秒
-timeout /b 3 /nobreak
+; timeout /T 3 /nobreak
 
+echo;
 echo # 删除 %MCSManager_install_file%
-rd /s /q %MCSManager_install_file%
+; rd /s /q "%MCSManager_install_file%"
 
-:pause
+:gotopause
+echo;
+if %errorlevel% neq 0 echo 错误代码 %errorlevel%
 if "%1" neq "nopause" (
-    echo;
-    if %errorlevel% neq 0 echo 错误代码 %errorlevel%
     echo 程序已停止，按任意键退出
-    pause >nul
+    ; pause >nul
 )
