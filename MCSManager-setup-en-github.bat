@@ -131,13 +131,20 @@ echo;
 if "%can_not_install_services%"=="true" (
     echo Service installation failed. Please restart Windows and try again
 ) else (
-    echo Service installation successful! To start the service, use the following command with administrator privileges:
+    echo Service installation successful! Run the following command with administrator privileges to start the service:
     ; echo sc start MCSManager-daemon ^&^& sc start MCSManager-web
 )
 
 :gotopause
 echo;
 if %errorlevel% neq 0 echo Error code %errorlevel%
+echo If you need to run the installation script again, please run the command with administrator privileges:
+; echo "%%temp%%\MCSManager-setup-cn-gitee.bat"
+; echo;
+echo If you need to delete the installation script and cache compression package, please run the command with administrator privileges:
+; echo del "%%temp%%\MCSManager-setup-cn-gitee.bat"
+; echo del "%%temp%%\MCSManager.zip"
+; echo;
 if "%1" neq "nopause" (
     echo The program has stopped, press any key to exit
     ; pause >nul

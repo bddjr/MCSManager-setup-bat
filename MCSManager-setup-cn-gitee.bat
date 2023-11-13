@@ -131,13 +131,20 @@ echo;
 if "%can_not_install_services%"=="true" (
     echo 服务安装失败，请重启Windows后重试
 ) else (
-    echo 服务安装成功！以管理员权限下面这行命令以启动服务：
+    echo 服务安装成功！用管理员权限运行下面这行命令即可启动服务：
     ; echo sc start MCSManager-daemon ^&^& sc start MCSManager-web
 )
 
 :gotopause
 echo;
 if %errorlevel% neq 0 echo 错误代码 %errorlevel%
+echo 如果需要再次运行安装脚本，请用管理员权限运行命令：
+; echo "%%temp%%\MCSManager-setup-cn-gitee.bat"
+; echo;
+echo 如果需要删除安装脚本与缓存压缩包，请用管理员权限运行命令：
+; echo del "%%temp%%\MCSManager-setup-cn-gitee.bat"
+; echo del "%%temp%%\MCSManager.zip"
+; echo;
 if "%1" neq "nopause" (
     echo 程序已停止，按任意键退出
     ; pause >nul

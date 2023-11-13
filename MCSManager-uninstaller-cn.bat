@@ -44,6 +44,12 @@ if not exist "%MCSManager_install_file%\" echo 移除成功。
 :gotopause
 echo;
 if %errorlevel% neq 0 echo 错误代码 %errorlevel%
+echo 如果需要再次运行卸载脚本，请用管理员权限运行命令：
+; echo "%%temp%%\MCSManager-uninstaller-cn.bat"
+; echo;
+echo 如果需要删除卸载脚本，请用管理员权限运行命令：
+; echo del "%%temp%%\MCSManager-uninstaller-cn.bat"
+; echo;
 if "%1" neq "nopause" (
     echo 程序已停止，按任意键退出
     ; pause >nul
