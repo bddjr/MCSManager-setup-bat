@@ -1,3 +1,7 @@
+# 警告：该程序还未通过测试，请不要使用！
+
+***
+
 # MCSManager setup bat
 一款为 MCSManager 做的 Windows 版在线安装脚本。  
 

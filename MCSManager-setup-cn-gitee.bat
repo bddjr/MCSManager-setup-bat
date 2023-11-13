@@ -12,17 +12,28 @@ Net session >nul 2>&1 || (
     exit
 )
 
+echo 你确定要安装 MCSManager 吗？如果确定则输入yes
+set /p y_n=
+if /i "%y_n%" neq "yes" goto pause
+
+
 set MCSManager_zip_name=MCSManager.zip
 set MCSManager_install_file=C:\Program Files\MCSManager
 set WinSW_name=WinSW.NET461.exe
 
 
 echo # 下载 MCSManager
-powershell curl -o %MCSManager_zip_name% https://gitee.com/bddjr/MCSManager-setup-bat/releases/download/MCSManager/%MCSManager_zip_name%
+if not exist %MCSManager_zip_name% (
+    del %MCSManager_zip_name%
+    if %errorlevel% neq 0 goto pause
+)
+@echo on
+powershell Invoke-WebRequest -Uri https://gitee.com/bddjr/MCSManager-setup-bat/releases/download/MCSManager/%MCSManager_zip_name% -OutFile %MCSManager_zip_name%
+@echo off
 if %errorlevel% neq 0 goto pause
 
-echo;
 echo # 解压到 "%MCSManager_install_file%"
+mkdir %MCSManager_install_file%
 powershell Expand-Archive -LiteralPath %MCSManager_zip_name% -DestinationPath """%MCSManager_install_file%"""
 if %errorlevel% neq 0 goto pause
 
