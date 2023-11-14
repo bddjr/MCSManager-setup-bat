@@ -6,10 +6,14 @@
 # MCSManager setup bat
 一款为 MCSManager 做的 Windows 版在线安装脚本。  
 
+已测试有效的操作系统：  
+> Windows 10 专业版 (x64)  
+> Windows 10 LTSC 2019 (x64)  
+
 [使用MIT许可证。](https://mit-license.org)  
 仓库：  
 > 境内Gitee:  https://gitee.com/bddjr/MCSManager-setup-bat  
-> 境外Github:  https://github.com/bddjr/MCSManager-setup-bat
+> 境外Github:  https://github.com/bddjr/MCSManager-setup-bat  
 
 ***
 ## 开始使用

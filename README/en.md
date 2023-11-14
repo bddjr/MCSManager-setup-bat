@@ -6,6 +6,10 @@
 # MCSManager setup bat
 A Windows version online installation script for MCSManager.
 
+Tested valid OS:  
+> Windows 10 Pro (x64)  
+> Windows 10 LTSC 2019 (x64)  
+
 [Using MIT license.](https://mit-license.org)  
 Github: https://github.com/bddjr/MCSManager-setup-bat
 
@@ -59,8 +63,7 @@ cd /d "%temp%" && powershell "(-join("""`r`n""" , (((Invoke-WebRequest -Uri http
 This script will stop the service, remove the service, and then delete the folder `C:\Program Files\MCSManager` .  
 
 ### 2. Delete Uninstall Script
-cmd run command
-cmd 运行命令  
+cmd run command  
 ```cmd
 del "%temp%\MCSManager-uninstaller-en.bat"
 ```
